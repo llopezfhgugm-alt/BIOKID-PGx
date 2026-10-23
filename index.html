@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BIOKID-PGx</title>
+<style>
+  :root {
+    --azul: #1d3557;
+    --azul-claro: #457b9d;
+    --verde: #2a9d8f;
+    --fondo: #f7f9fb;
+    --texto: #1f2933;
+    --gris: #6b7785;
+    --acento: #e76f51;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--texto);
+    background: var(--fondo);
+    line-height: 1.6;
+  }
+  .aviso-boceto {
+    background: var(--acento);
+    color: #fff;
+    text-align: center;
+    font-size: 0.85rem;
+    padding: 6px;
+    letter-spacing: 0.04em;
+  }
+  header {
+    background: #fff;
+    border-bottom: 1px solid #e1e6ec;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .barra {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .logo { font-weight: 800; color: var(--azul); font-size: 1.2rem; }
+  .logo span { color: var(--azul-claro); font-weight: 400; }
+  nav a {
+    color: var(--texto);
+    text-decoration: none;
+    margin-left: 18px;
+    font-size: 0.95rem;
+  }
+  nav a:hover, nav a.activa {
+    color: var(--azul-claro);
+    border-bottom: 2px solid var(--azul-claro);
+    padding-bottom: 2px;
+  }
+  .hero {
+    background: linear-gradient(135deg, var(--azul) 0%, var(--azul-claro) 100%);
+    color: #fff;
+    padding: 90px 20px;
+    text-align: center;
+  }
+  .hero h1 { font-size: 2.8rem; margin: 0 0 10px; line-height: 1.15; }
+  .hero .subtitulo {
+    font-size: 1.15rem;
+    opacity: 0.92;
+    max-width: 760px;
+    margin: 0 auto 28px;
+  }
+  .boton {
+    display: inline-block;
+    background: #fff;
+    color: var(--azul);
+    padding: 12px 26px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 6px;
+  }
+  .boton.secundario {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+  }
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+  section h2 { color: var(--azul); font-size: 1.8rem; margin-top: 0; }
+  .etiqueta {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--azul-claro);
+    margin-bottom: 4px;
+    display: block;
+  }
+  .fondo-blanco { background: #fff; max-width: none; }
+  .fondo-blanco > .interior { max-width: 1100px; margin: 0 auto; }
+  .columnas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+    margin-top: 30px;
+  }
+  .tarjeta {
+    background: #fff;
+    border: 1px solid #e1e6ec;
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .tarjeta h3 { margin-top: 0; color: var(--azul); font-size: 1.1rem; }
+  .capa {
+    border-top: 4px solid var(--verde);
+  }
+  .capa.g { border-top-color: #264653; }
+  .capa.t { border-top-color: #e9c46a; }
+  .capa.m { border-top-color: #f4a261; }
+  .capa.b { border-top-color: #8ab17d; }
+  .capa.c { border-top-color: var(--azul-claro); }
+  .flujo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-top: 30px;
+  }
+  .flujo .paso {
+    background: #e3edf5;
+    color: var(--azul);
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    flex: 1 1 180px;
+    text-align: center;
+  }
+  .flujo .flecha { color: var(--azul-claro); font-size: 1.5rem; }
+  .imagen-placeholder {
+    background: #dde7ef;
+    border: 2px dashed #9fb3c4;
+    border-radius: 10px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gris);
+    font-style: italic;
+    margin-top: 30px;
+  }
+  .consorcio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .socio {
+    border: 1px solid #e1e6ec;
+    border-radius: 8px;
+    padding: 18px;
+    text-align: center;
+    background: var(--fondo);
+  }
+  .socio strong { display: block; color: var(--azul); }
+  .socio small { color: var(--gris); }
+  .noticia {
+    border-left: 4px solid var(--azul-claro);
+    padding: 10px 18px;
+    margin-bottom: 18px;
+    background: #fff;
+  }
+  .noticia time { font-size: 0.85rem; color: var(--gris); }
+  .contacto-box {
+    background: var(--azul);
+    color: #fff;
+    border-radius: 12px;
+    padding: 36px;
+    text-align: center;
+  }
+  .contacto-box a { color: #fff; font-weight: 600; }
+  footer {
+    background: #14243b;
+    color: #c9d6e2;
+    padding: 36px 20px;
+    font-size: 0.88rem;
+  }
+  footer .contenido {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  footer h4 { color: #fff; margin: 0 0 8px; }
+  .financiacion {
+    max-width: 1100px;
+    margin: 24px auto 0;
+    border-top: 1px solid #2c4362;
+    padding-top: 18px;
+    font-size: 0.82rem;
+    color: #9fb3c4;
+  }
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 2rem; }
+    nav a { margin-left: 12px; font-size: 0.88rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="aviso-boceto">BOCETO DE DISEÑO · textos del resumen del proyecto; logos, socios y fechas pendientes</div>
+
+<header>
+  <div class="barra">
+    <div class="logo">BIOKID<span>-PGx</span></div>
+    <nav>
+      <a href="#inicio" class="activa">Home</a>
+      <a href="#proyecto">The project</a>
+      <a href="#enfoque">Approach</a>
+      <a href="#consorcio">Consortium</a>
+      <a href="#familias">Patients &amp; families</a>
+      <a href="#noticias">News</a>
+      <a href="#contacto">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="inicio">
+  <h1>BIOKID-PGx</h1>
+  <p class="subtitulo">Predicting response to anti-TNF therapy in pediatric inflammatory bowel disease, so every child receives the most suitable treatment.</p>
+  <a class="boton" href="#proyecto">Discover the project</a>
+  <a class="boton secundario" href="#familias">For families</a>
+</div>
+
+<section id="proyecto">
+  <span class="etiqueta">The project</span>
+  <h2>Why it matters</h2>
+  <p>
+    Pediatric inflammatory bowel disease (pIBD) is a chronic condition that can strongly affect the health and quality of life
+    of children and their families. Anti-TNF biological therapies have greatly improved its management, but not every patient
+    responds, and today it is difficult to predict which therapy will work best for each individual child.
+  </p>
+  <div class="columnas">
+    <div class="tarjeta">
+      <h3>The goal</h3>
+      <p>Develop and validate a multi-omics-based risk score that predicts response to anti-TNF therapy.</p>
+    </div>
+    <div class="tarjeta">
+      <h3>The clinical benefit</h3>
+      <p>Support personalized treatment decisions and reduce ineffective treatments in children with IBD.</p>
+    </div>
+    <div class="tarjeta">
+      <h3>The digital tool</h3>
+      <p>An AI-enabled platform to bring the predictive score into everyday clinical practice.</p>
+    </div>
+  </div>
+</section>
+
+<section class="fondo-blanco" id="enfoque">
+  <div class="interior">
+    <span class="etiqueta">Approach</span>
+    <h2>One integrated picture of each child</h2>
+    <p>
+      Genomic, transcriptomic, metabolomic and microbiome data are combined with clinical information using advanced
+      bioinformatics and machine-learning methods. The aim is to identify and validate biomarkers linked to treatment response
+      and merge them into one personalized predictive score, tested in international cohorts of children with IBD.
+    </p>
+    <div class="columnas">
+      <div class="tarjeta capa g"><h3>Genomics</h3><p>Pharmacogenetic and genetic variants.</p></div>
+      <div class="tarjeta capa t"><h3>Transcriptomics</h3><p>Gene expression profiles.</p></div>
+      <div class="tarjeta capa m"><h3>Metabolomics</h3><p>Metabolic signatures.</p></div>
+      <div class="tarjeta capa b"><h3>Microbiome</h3><p>Gut microbial composition.</p></div>
+      <div class="tarjeta capa c"><h3>Clinical data</h3><p>Disease characteristics and treatment history.</p></div>
+    </div>
+    <div class="flujo">
+      <div class="paso">Multi-omics data</div><div class="flecha">→</div>
+      <div class="paso">ML integration &amp; biomarkers</div><div class="flecha">→</div>
+      <div class="paso">Predictive risk score</div><div class="flecha">→</div>
+      <div class="paso">Clinical decision support</div>
+    </div>
+    <div class="imagen-placeholder">[Optional: diagram or photo of the research team at work]</div>
+  </div>
+</section>
+
+<section id="consorcio">
+  <span class="etiqueta">Consortium</span>
+  <h2>A multidisciplinary, international team</h2>
+  <p>Brief presentation of the partners and each group's role: clinicians, data scientists, omics laboratories and patient representatives.</p>
+  <div class="consorcio-grid">
+    <div class="socio"><strong>[Partner 1]</strong><small>Country · coordinator</small></div>
+    <div class="socio"><strong>[Partner 2]</strong><small>Country · omics</small></div>
+    <div class="socio"><strong>[Partner 3]</strong><small>Country · bioinformatics / AI</small></div>
+    <div class="socio"><strong>[Partner 4]</strong><small>Country · clinical cohorts</small></div>
+    <div class="socio"><strong>[Patient organization]</strong><small>Country · patient involvement</small></div>
+  </div>
+</section>
+
+<section class="fondo-blanco" id="familias">
+  <div class="interior">
+    <span class="etiqueta">Patients &amp; families</span>
+    <h2>Families are part of the project</h2>
+    <p>
+      Patients and families are involved throughout BIOKID-PGx. Here we explain, in plain language, what the project is,
+      what participating would involve and how personal data are protected.
+    </p>
+    <div class="columnas">
+      <div class="tarjeta"><h3>What is it?</h3><p>A research project to make IBD treatment more personalized for children.</p></div>
+      <div class="tarjeta"><h3>How can I take part?</h3><p>Eligibility, steps and contact details for participating centers.</p></div>
+      <div class="tarjeta"><h3>Your data</h3><p>Consent, confidentiality and your rights as a participant.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="noticias">
+  <span class="etiqueta">News</span>
+  <h2>Latest updates</h2>
+  <div class="noticia">
+    <time>[dd/mm/yyyy]</time>
+    <p><strong>[News title]</strong><br>One or two lines summarizing the update.</p>
+  </div>
+  <div class="noticia">
+    <time>[dd/mm/yyyy]</time>
+    <p><strong>[Publication]</strong><br>Authors, journal and link.</p>
+  </div>
+  <div class="noticia">
+    <time>[dd/mm/yyyy]</time>
+    <p><strong>[Consortium meeting or event]</strong><br>Place and date.</p>
+  </div>
+</section>
+
+<section class="fondo-blanco" id="contacto">
+  <div class="interior">
+    <div class="contacto-box">
+      <h2 style="color:#fff;">Get in touch</h2>
+      <p>Questions about the project? We will be glad to hear from you.</p>
+      <p><a href="mailto:contact@example.org">contact@example.org</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="contenido">
+    <div>
+      <h4>BIOKID-PGx</h4>
+      <p>Multidisciplinary project on personalized medicine in pediatric IBD.</p>
+    </div>
+    <div>
+      <h4>Funding</h4>
+      <p>[Funding programme and national agencies, as required by the call.]</p>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <p>General information only. Privacy policy and cookie settings.</p>
+    </div>
+  </div>
+  <div class="financiacion">
+    Partner and funder logos · © [year] BIOKID-PGx consortium
+  </div>
+</footer>
+
+</body>
+</html>
