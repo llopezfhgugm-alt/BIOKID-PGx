@@ -206,9 +206,126 @@
     font-size: 0.82rem;
     color: #9fb3c4;
   }
+
+  /* Rotating news banner */
+  .news-carousel {
+    position: relative;
+    min-height: 430px;
+    overflow: hidden;
+    background: #14243b;
+    color: #fff;
+  }
+  .news-slide {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .7s ease, visibility .7s ease;
+    background-size: cover;
+    background-position: center;
+  }
+  .news-slide.active { opacity: 1; visibility: visible; }
+  .news-slide::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(10,31,54,.95) 0%, rgba(10,31,54,.78) 42%, rgba(10,31,54,.18) 76%, rgba(10,31,54,.08) 100%);
+  }
+  .news-banner-content {
+    position: relative;
+    z-index: 1;
+    width: min(1100px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 62px 70px 62px 20px;
+  }
+  .news-kicker {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #cce8ff;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .news-banner-content h2 {
+    max-width: 650px;
+    margin: 0 0 12px;
+    color: #fff;
+    font-size: clamp(1.8rem, 4vw, 3.25rem);
+    line-height: 1.08;
+  }
+  .news-banner-content p {
+    max-width: 620px;
+    margin: 0 0 24px;
+    font-size: 1.05rem;
+  }
+  .news-banner-link {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 7px;
+    background: #fff;
+    color: var(--azul);
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .news-banner-link:hover { background: #eaf3fa; }
+  .carousel-control {
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    width: 42px;
+    height: 42px;
+    transform: translateY(-50%);
+    border: 1px solid rgba(255,255,255,.55);
+    border-radius: 50%;
+    background: rgba(20,36,59,.45);
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.35rem;
+  }
+  .carousel-control:hover { background: rgba(20,36,59,.85); }
+  .carousel-control.prev { left: 14px; }
+  .carousel-control.next { right: 14px; }
+  .carousel-dots {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    bottom: 18px;
+    display: flex;
+    gap: 8px;
+    transform: translateX(-50%);
+  }
+  .carousel-dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,.5);
+    cursor: pointer;
+  }
+  .carousel-dot.active { background: #fff; transform: scale(1.18); }
+  .logo-news-slide {
+    background-color: #f4f8fb;
+    background-size: min(58vw, 720px) auto;
+    background-repeat: no-repeat;
+    background-position: 84% center;
+  }
+  .logo-news-slide::before {
+    background: linear-gradient(90deg, rgba(10,31,54,.97) 0%, rgba(10,31,54,.88) 43%, rgba(10,31,54,.30) 72%, rgba(10,31,54,.08) 100%);
+  }
+
   @media (max-width: 720px) {
     .hero h1 { font-size: 2rem; }
     nav a { margin-left: 12px; font-size: 0.88rem; }
+    .news-carousel { min-height: 470px; }
+    .news-banner-content { padding: 58px 42px 58px 20px; }
+    .news-slide::before { background: rgba(10,31,54,.78); }
+    .logo-news-slide { background-size: 82vw auto; background-position: center 72%; }
+    .logo-news-slide::before { background: rgba(10,31,54,.78); }
+    .carousel-control { width: 36px; height: 36px; }
   }
 </style>
 </head>
@@ -230,6 +347,32 @@
     </nav>
   </div>
 </header>
+
+<div class="news-carousel" id="noticias" aria-label="Latest project news">
+  <article class="news-slide active logo-news-slide" style="background-image: url('biokid-pgx_logo.png');">
+    <div class="news-banner-content">
+      <span class="news-kicker">Project update · 1 May 2026</span>
+      <h2>BIOKID-PGx officially launched</h2>
+      <p>The BIOKID-PGx project officially started on 1 May 2026, marking the beginning of a European collaborative effort to advance precision medicine in paediatric inflammatory bowel disease.</p>
+      <a class="news-banner-link" href="#proyecto">Discover the project</a>
+    </div>
+  </article>
+
+  <article class="news-slide" style="background-image: url('ifcca-news-banner.jpg');">
+    <div class="news-banner-content">
+      <span class="news-kicker">Latest news · 20 November 2026</span>
+      <h2>BIOKID-PGx at IFCCA Research Day 2026</h2>
+      <p>BIOKID-PGx will be presented at the IFCCA Research Day in Brussels, bringing together patient organisations, researchers and European stakeholders.</p>
+      <a class="news-banner-link" href="IFCCA-Research-Day-Programme-2026.pdf" target="_blank" rel="noopener noreferrer">View the event programme (PDF)</a>
+    </div>
+  </article>
+
+  <!-- To add another item, duplicate the article above, change its text, image and PDF link. -->
+  <button class="carousel-control prev" type="button" aria-label="Previous news">&#10094;</button>
+  <button class="carousel-control next" type="button" aria-label="Next news">&#10095;</button>
+  <div class="carousel-dots" aria-label="Choose news item"></div>
+</div>
+
 
 <div class="hero" id="inicio">
   <h1>BIOKID-PGx</h1>
@@ -317,40 +460,14 @@
   </div>
 </section>
 
-<section id="noticias">
-  <span class="etiqueta">News</span>
-  <h2>Latest updates</h2>
 
-  <div class="noticia">
-    <time>20/11/2026</time>
-    <p>
-      <strong>BIOKID-PGx at IFCCA Research Day 2026</strong><br>
-      BIOKID-PGx will be presented at the IFCCA Research Day in Brussels,
-      an event bringing together patient organisations, researchers and
-      other stakeholders involved in inflammatory bowel disease research.
-    </p>
-    <p>
-      <a href="./IFCCA-Research-Day-Programme-2026.pdf" target="_blank" rel="noopener noreferrer">View the event programme (PDF)</a>
-    </p>
-  </div>
-
-  <div class="noticia">
-    <time>[dd/mm/yyyy]</time>
-    <p><strong>[Publication]</strong><br>Authors, journal and link.</p>
-  </div>
-
-  <div class="noticia">
-    <time>[dd/mm/yyyy]</time>
-    <p><strong>[Consortium meeting or event]</strong><br>Place and date.</p>
-  </div>
-</section>
 
 <section class="fondo-blanco" id="contacto">
   <div class="interior">
     <div class="contacto-box">
       <h2 style="color:#fff;">Get in touch</h2>
       <p>Questions about the project? We will be glad to hear from you.</p>
-      <p><a href="mailto:biokidpgx@gmail.com">biokidpgx@gmail.com</a></p>
+      <p><a href="mailto:contact@example.org">contact@example.org</a></p>
     </div>
   </div>
 </section>
@@ -374,6 +491,58 @@
     Partner and funder logos · © [year] BIOKID-PGx consortium
   </div>
 </footer>
+
+
+<script>
+(function () {
+  const carousel = document.querySelector('.news-carousel');
+  if (!carousel) return;
+  const slides = Array.from(carousel.querySelectorAll('.news-slide'));
+  const dotsBox = carousel.querySelector('.carousel-dots');
+  const prev = carousel.querySelector('.prev');
+  const next = carousel.querySelector('.next');
+  let current = 0;
+  let timer;
+
+  function show(index) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+    dotsBox.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === current);
+      dot.setAttribute('aria-current', i === current ? 'true' : 'false');
+    });
+  }
+
+  function restart() {
+    clearInterval(timer);
+    if (slides.length > 1) timer = setInterval(() => show(current + 1), 6500);
+  }
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'carousel-dot';
+    dot.setAttribute('aria-label', 'Show news item ' + (i + 1));
+    dot.addEventListener('click', () => { show(i); restart(); });
+    dotsBox.appendChild(dot);
+  });
+
+  prev.addEventListener('click', () => { show(current - 1); restart(); });
+  next.addEventListener('click', () => { show(current + 1); restart(); });
+  carousel.addEventListener('mouseenter', () => clearInterval(timer));
+  carousel.addEventListener('mouseleave', restart);
+  carousel.addEventListener('focusin', () => clearInterval(timer));
+  carousel.addEventListener('focusout', restart);
+
+  if (slides.length < 2) {
+    prev.hidden = true;
+    next.hidden = true;
+    dotsBox.hidden = true;
+  }
+  show(0);
+  restart();
+})();
+</script>
 
 </body>
 </html>
